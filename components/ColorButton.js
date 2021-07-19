@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
-import ColorButton from "./components/ColorButton"
-import icon from "./assets/icon.png";
 
 
-export default function App() {
-  const [backgroundColor, setBackgroundColor] = useState("blue");
-  return(
-    <View style={ [styles.container, {backgroundColor}]}>
-      <ColorButton backgroundColor="red" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="green" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="blue" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="yellow" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="purple" onPress={setBackgroundColor}/>
-    </View>
+export default function ColorButton({backgroundColor, onPress}) {
+  return (
+    <TouchableHighlight style={styles.button} onPress={() => onPress(backgroundColor) } underlayColor="orange">
+        <View style={styles.row}>
+          <View style={[styles.sample, {backgroundColor}]}></View>
+          <Text style={styles.buttonText}>{backgroundColor}</Text>
+        </View>
+    </TouchableHighlight>
   )
 }
+
 
 const styles = StyleSheet.create({
   container: {
