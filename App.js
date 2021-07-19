@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import ColorButton from "./components/ColorButton"
+import ColorForm from "./components/ColorForm"
 import icon from "./assets/icon.png";
 
 
 export default function App() {
   const [backgroundColor, setBackgroundColor] = useState("blue");
   return(
-    <View style={ [styles.container, {backgroundColor}]}>
-      <ColorButton backgroundColor="red" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="green" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="blue" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="yellow" onPress={setBackgroundColor}/>
-      <ColorButton backgroundColor="purple" onPress={setBackgroundColor}/>
-    </View>
+    <>
+      <ColorForm></ColorForm>
+      <View style={ [styles.container, {backgroundColor}]}>
+        <ColorButton backgroundColor="red" onPress={setBackgroundColor}/>
+        <ColorButton backgroundColor="green" onPress={setBackgroundColor}/>
+        <ColorButton backgroundColor="blue" onPress={setBackgroundColor}/>
+        <ColorButton backgroundColor="yellow" onPress={setBackgroundColor}/>
+        <ColorButton backgroundColor="purple" onPress={setBackgroundColor}/>
+      </View>
+    </>
   )
 }
 
