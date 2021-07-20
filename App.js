@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, Alert } from 'react-native';
 import ColorButton from "./components/ColorButton"
 import ColorForm from "./components/ColorForm"
 import icon from "./assets/icon.png";
@@ -9,7 +9,7 @@ export default function App() {
   const [backgroundColor, setBackgroundColor] = useState("blue");
   return(
     <>
-      <ColorForm></ColorForm>
+      <ColorForm onNewColour={newColor => Alert.alert(`TODO: add color ${newColor}`)}></ColorForm>
       <View style={ [styles.container, {backgroundColor}]}>
         <ColorButton backgroundColor="red" onPress={setBackgroundColor}/>
         <ColorButton backgroundColor="green" onPress={setBackgroundColor}/>
