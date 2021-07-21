@@ -1,22 +1,41 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableHighlight, Alert } from 'react-native';
-import ColorButton from "./components/ColorButton"
-import ColorForm from "./components/ColorForm"
+import { StyleSheet, FlatList} from 'react-native';
+import ColorButton from "./components/ColorButton";
+import ColorForm from "./components/ColorForm";
+import { generate } from "shortid";
 import icon from "./assets/icon.png";
 
 
+const useColors = () => {
+  const [colors, setColors] = useState([]);
+  const addColor = color => {
+    const newColor = { id: generate(), color}
+    setColors([ newColor, ...colors]);
+  }
+  return { colors, addColor }
+}
+
 export default function App() {
   const [backgroundColor, setBackgroundColor] = useState("blue");
+  const { colors, addColor } = useColors();
   return(
     <>
-      <ColorForm onNewColour={newColor => Alert.alert(`TODO: add color ${newColor}`)}></ColorForm>
-      <View style={ [styles.container, {backgroundColor}]}>
-        <ColorButton backgroundColor="red" onPress={setBackgroundColor}/>
-        <ColorButton backgroundColor="green" onPress={setBackgroundColor}/>
-        <ColorButton backgroundColor="blue" onPress={setBackgroundColor}/>
-        <ColorButton backgroundColor="yellow" onPress={setBackgroundColor}/>
-        <ColorButton backgroundColor="purple" onPress={setBackgroundColor}/>
-      </View>
+      <ColorForm onNewColour={addColor}></ColorForm>
+      <FlatList
+        style={[styles.container, {backgroundColor}]}
+        data={colors}
+        renderItem={({ item }) => {
+          return (
+            <ColorButton
+              key={item.id}
+              backgroundColor={item.color}
+              onPress={setBackgroundColor}
+            />
+          )
+        }
+
+        }
+      />
     </>
   )
 }
@@ -25,8 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
   },
   button: {
     fontSize: 30,
