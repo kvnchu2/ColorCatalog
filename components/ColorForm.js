@@ -20,9 +20,9 @@ export default function ColorForm({ onNewColour = f => f}) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "white"
   },
   txtInput: {
     flex: 1,
