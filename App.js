@@ -1,65 +1,18 @@
-import React, { useState } from 'react';
-import { StyleSheet, FlatList} from 'react-native';
-import ColorButton from "./components/ColorButton";
-import ColorForm from "./components/ColorForm";
+import React from "react";
+import ColorList from "./components/ColorList";
+import ColorDetails from "./components/ColorDetails";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator} from "@react-navigation/stack";
 
-import { useColors } from "./hooks.js"
-import icon from "./assets/icon.png";
-
+const { Navigator, Screen} = createStackNavigator();
 
 export default function App() {
-  const [backgroundColor, setBackgroundColor] = useState("blue");
-  const { colors, addColor } = useColors();
-  return(
-    <>
-      <ColorForm onNewColour={addColor}></ColorForm>
-      <FlatList
-        style={[styles.container, {backgroundColor}]}
-        data={colors}
-        renderItem={({ item }) => {
-          return (
-            <ColorButton
-              key={item.id}
-              backgroundColor={item.color}
-              onPress={setBackgroundColor}
-            />
-          )
-        }
-
-        }
-      />
-    </>
+  return (
+    <NavigationContainer>
+      <Navigator>
+        <Screen name="Home" component={ColorList}></Screen>
+        <Screen name="Details" component={ColorDetails}></Screen>
+      </Navigator>
+    </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: "flex",
-  },
-  button: {
-    fontSize: 30,
-    margin: 10,
-    padding: 10, 
-    borderWidth: 2,
-    borderRadius: 10,
-    alignSelf: "stretch",
-    textAlign: "center",
-    backgroundColor: "rgba(255,255,255, .8)"
-  },
-  buttonText: {
-    fontSize: 30,
-    textAlign: "center"
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  sample: {
-    height: 20,
-    width: 20,
-    margin: 5,
-    borderRadius: 10,
-    backgroundColor: "white"
-  }
-})
