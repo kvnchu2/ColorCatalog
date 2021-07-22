@@ -2,18 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, FlatList} from 'react-native';
 import ColorButton from "./components/ColorButton";
 import ColorForm from "./components/ColorForm";
-import { generate } from "shortid";
+
+import { useColors } from "./hooks.js"
 import icon from "./assets/icon.png";
 
-
-const useColors = () => {
-  const [colors, setColors] = useState([]);
-  const addColor = color => {
-    const newColor = { id: generate(), color}
-    setColors([ newColor, ...colors]);
-  }
-  return { colors, addColor }
-}
 
 export default function App() {
   const [backgroundColor, setBackgroundColor] = useState("blue");
